@@ -3,8 +3,18 @@ const client = new Discord.Client()
 
 const prefix = "dbot "
 
+const express = require("express")
+const app = express()
+
+app.get("/", (res, req) => {
+  res.sendStatus(200)
+})
+
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Bot website is up.")
+})
 client.on("ready", () => {
-  console.log("Bot has started.")
+  console.log("DominoBot has started.")
 }) 
 
 client.on("message", async message => {
@@ -25,6 +35,15 @@ client.on("message", async message => {
   if (command == "say") {
     message.channel.send(args.join(" "))
     message.delete()
+  }
+  if (command == "vore") {
+    message.channel.send("that's hot")
+  }
+  if (command == "ver") {
+    message.channel.send("Domino Bot: ver. 1 (Beta Release)")
+  }
+  if (command == "help") {
+    message.channel.send("Not a really good help chart, but the current commands available are: hi, say, vore, ban, kick, and ver!")
   }
   if (command == "ban") {
     if (!message.member.hasPermission("BAN_MEMBERS")) {
